@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_expense_planner/widgets/user_transactions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Expense Planner',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -29,17 +31,23 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Expense Planner'),
       ),
-      body: Column(
+      body: const Column(
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Card(
-                child: Text('chart'),
-              elevation: 5,
+                elevation: 5,
+                child: Center(child: Text('chart')),
             ),
           ),
-          Card(child: Text('List of expenses'),)
+          Expanded(child: UserTransactions()),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'widgets/chart.dart';
 import 'widgets/transaction_form.dart';
@@ -6,6 +7,8 @@ import 'models/transaction.dart';
 import 'widgets/transaction_list.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
   runApp(const MyApp());
 }
 
@@ -21,8 +24,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple, secondary: Colors.amber),
         fontFamily: 'Quicksand',
-        textTheme: ThemeData.light().textTheme.copyWith(titleMedium: TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.bold, fontSize: 18)),
-        appBarTheme: AppBarTheme(titleTextStyle: TextStyle(fontFamily: 'OpenSans', fontSize: 20, fontWeight: FontWeight.bold))
+        textTheme: ThemeData.light().textTheme.copyWith(titleMedium: const TextStyle(fontFamily: 'OpenSans', fontWeight: FontWeight.bold, fontSize: 18)),
+        appBarTheme: const AppBarTheme(titleTextStyle: TextStyle(fontFamily: 'OpenSans', fontSize: 20, fontWeight: FontWeight.bold))
       ),
       home: const MyHomePage(),
     );
@@ -52,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tx) {
-      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+      return tx.date.isAfter(DateTime.now().subtract(const Duration(days: 7)));
     }).toList();
   }
 
